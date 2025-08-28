@@ -24,29 +24,96 @@ All modules are integrated in a **top module** (`cus19_top_module.sv`) and teste
 
 ---
 
-### 🔹 Datapath Components  
-- **Program Counter (PC)** with increment and branch update logic  
-- **Instruction Memory** with preloaded test instructions  
-- **Decoder** for extracting opcode, funct, registers, and immediates  
-- **Control Unit** for generating control signals  
-- **Register File (16 × 8-bit general purpose registers)**  
-- **ALU** supporting:  
-  - Arithmetic: ADD, SUB, MUL, DIV  
-  - Logical: AND, OR, XOR, XNOR, NOR, NAND  
-- **Branch Unit** for conditional execution  
-- **Load Unit** (read from memory into registers)  
-- **Store Unit** (write from registers into memory)  
-- **Data Memory** for program data storage  
+### 🔹 Processor Datapath  
+
+- **Program Counter (PC)**  
+  - Increments sequentially or updates with branch/jump addresses.  
+
+- **Instruction Memory**  
+  - Stores instruction programs in a simple array.  
+
+- **Decoder**  
+  - Extracts opcode, funct, registers, and immediates from the 19-bit instruction.  
+  - Provides inputs to the control unit and datapath.  
+
+- **Control Unit**  
+  - Generates control signals for ALU operations, branching, load/store, and special units.  
+  - Prioritizes execution when multiple conditions are triggered.  
+
+- **Register File**  
+  - 16 general-purpose registers, each 8-bit wide.  
+  - Supports dual read and single write per cycle.  
+
+- **Arithmetic Logic Unit (ALU)**  
+  - Performs arithmetic operations (ADD, SUB, MUL, DIV).  
+  - Supports bitwise operations (AND, OR, XOR, XNOR, NOR, NAND).  
+  - Optimized for single-cycle execution.  
+
+- **Branch Unit**  
+  - Evaluates conditions (equal, not equal etc.).  
+  - Updates PC for control-flow changes.  
+
+- **Load/Store Units**  
+  - Abstract memory access from the datapath.  
+  - Enable register-to-memory and memory-to-register transfers.  
+
+- **Data Memory**  
+  - Separate from instruction memory (Harvard-style organization).  
+  - Supports byte addressing.  
 
 ---
 
 ### 🔹 Specialized Units  
-- **Cryptography Unit** → placeholder hooks for **encryption/decryption instructions**   
----
-
-
-- **Example Instruction Programs** preloaded in instruction memory  
+- **Cryptography Unit**  
+  - Placeholder for AES-style encryption/decryption.  
+  - Hooked into S-type instructions.   
 
 ---
 
-## 🏗️ Repository Structure  
+### 🔹 Verification & Testing  
+**Example Instruction Programs** preloaded in instruction memory  
+A layered test strategy was used:  
+
+1. **Module-level Testing**  
+   - Each unit (ALU, Register File, Branch, Memory) tested with standalone SystemVerilog testbenches.  
+
+2. **Integrated Processor Testing**  
+   - Top module testbench (`cus19_top_module_tb.v`) executes small programs.  
+
+3. **Waveform Debugging**  
+   - EPWave and Modelsim viewer used for cycle-accurate tracing of signals.  
+   - Verified control flow, register updates, and memory transactions.  
+---
+
+## 📊 Key Learnings  
+
+- **ISA Design**: Balancing opcode space, field sizes, and extensibility.  
+- **Modular Datapath**: Clean separation of ALU, control, memory, and special units.  
+- **Control Signal Generation**: Handling priority between normal and special instructions.  
+- **Verification Flow**: Importance of staged verification (module → integration → waveform).  
+- **Extensibility**: Designing an ISA that can scale into **crypto/DSP accelerators**.  
+
+---
+
+## 📌 Future Work  
+
+- Implement **5-stage pipelining** with hazard detection and forwarding.  
+- Extend cryptography unit into a working **AES core**.  
+- Build a functional **FFT datapath** and integrate with S-type ISA.  
+- Synthesize on an **FPGA (Intel/AMD)** and measure performance.  
+- Benchmark against existing RISC cores for comparison.  
+
+---
+
+## 👨‍💻 Authors  
+
+- **Prasanna Venkatesh s**  
+
+
+---
+
+⚡ CUS19 demonstrates how a **custom-designed ISA processor** can be architected, implemented, and verified entirely in Verilog/SystemVerilog, while leaving hooks for specialized hardware acceleration.  
+
+
+
+
