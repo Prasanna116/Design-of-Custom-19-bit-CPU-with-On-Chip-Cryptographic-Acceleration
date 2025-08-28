@@ -6,10 +6,10 @@ This project implements a **Custom RISC-style Processor** with a **19-bit fixed 
 
 The processor supports a modular datapath, multiple instruction formats, and extensibility for specialized operations such as **cryptography** and **FFT**.  
 
-All modules are integrated in a **top module** (`cus19_top_module.sv`) and tested with **Extensive testbenches**. Simulation and waveform verification were performed in **ModelSim** and **EDA Playground (EPWave)**.  
-
-<img width="8192" height="2500" alt="CPU19" src="https://github.com/user-attachments/assets/2a4e8cae-917d-4f39-8298-ddaddf3875b0" />
+All modules are integrated in a **top module** (`cus19_top_module.v`) and tested with **Extensive testbenches**. Simulation and waveform verification were performed in **ModelSim** and **EDA Playground (EPWave)**.  
 ---
+<img width="8192" height="2500" alt="CPU19" src="https://github.com/user-attachments/assets/2a4e8cae-917d-4f39-8298-ddaddf3875b0" />
+
 ## 🚀 Features  
 
 ### 🔹 Custom ISA (CUS19)  
